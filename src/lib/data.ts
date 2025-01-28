@@ -3,7 +3,7 @@ import path from "node:path";
 
 export interface Article {
 	title: string;
-	url: string;
+	link: string;
 	publishedAt: string;
 	summary: string;
 	category: string;
@@ -13,7 +13,10 @@ export interface Article {
 
 export async function getArticles(date: string): Promise<Article[]> {
 	const [year, month, day] = date.split("-");
-	const filePath = path.join(process.cwd(), "data", year, month, `${day}.json`);
+	const filePath = path.join(
+		process.cwd(),
+		`data/${year}/${month}/${day}.json`,
+	);
 
 	try {
 		const data = await fs.readFile(filePath, "utf-8");
@@ -30,15 +33,20 @@ export async function getAllDates(): Promise<string[]> {
 
 	try {
 		const years = (await fs.readdir(dataDir)).filter((f) => !f.startsWith("."));
+
 		for (const year of years) {
 			const yearPath = path.join(dataDir, year);
 			const stat = await fs.stat(yearPath);
 			if (!stat.isDirectory()) continue;
 
-			const months = await fs.readdir(yearPath);
+			const months = (await fs.readdir(yearPath)).filter(
+				(f) => !f.startsWith("."),
+			);
 			for (const month of months) {
 				const monthPath = path.join(yearPath, month);
-				const days = await fs.readdir(monthPath);
+				const days = (await fs.readdir(monthPath)).filter(
+					(f) => !f.startsWith("."),
+				);
 
 				for (const day of days) {
 					if (day.endsWith(".json")) {

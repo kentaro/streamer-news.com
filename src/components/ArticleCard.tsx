@@ -10,8 +10,18 @@ interface ArticleCardProps {
   article: Article
 }
 
+function getDomain(url: string): string {
+  try {
+    const domain = new URL(url).hostname.replace(/^www\./, '')
+    return domain
+  } catch (error) {
+    console.error('Invalid URL:', url)
+    return new URL('https://example.com').hostname
+  }
+}
+
 export function ArticleCard({ article }: ArticleCardProps) {
-  const domain = new URL(article.url).hostname.replace(/^www\./, '')
+  const domain = getDomain(article.link)
 
   return (
     <div className="overflow-hidden bg-card rounded-lg border shadow-sm hover:shadow-lg transition-shadow">
@@ -35,7 +45,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
           </span>
         </div>
         <h3 className="text-lg font-semibold leading-tight mb-2 line-clamp-2">
-          <Link href={article.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
+          <Link href={article.link} target="_blank" rel="noopener noreferrer" className="hover:underline">
             {article.title}
           </Link>
         </h3>
