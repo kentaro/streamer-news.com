@@ -1,4 +1,13 @@
 import type { NextConfig } from "next";
+import { execSync } from "node:child_process";
+
+const generateRSS = () => {
+	if (process.env.NODE_ENV === "production") {
+		execSync("npm run generate-rss", { stdio: "inherit" });
+	}
+};
+
+generateRSS();
 
 const config: NextConfig = {
 	output: "export",

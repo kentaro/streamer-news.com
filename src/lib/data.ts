@@ -6,6 +6,7 @@ export interface Article {
 	link: string;
 	pubdate: string;
 	summary: string;
+	summary_lines?: string;
 	category: string;
 	count: number;
 	thumbnail?: string;

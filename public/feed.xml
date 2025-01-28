@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[Streamer News]]></title>
+        <description><![CDATA[動画配信関連のニュースをまとめるサイト]]></description>
+        <link>http://localhost:3000</link>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Tue, 28 Jan 2025 08:55:15 GMT</lastBuildDate>
+        <atom:link href="http://localhost:3000/feed.xml" rel="self" type="application/rss+xml"/>
+        <language><![CDATA[ja]]></language>
+        <ttl>60</ttl>
+        <item>
+            <title><![CDATA[テスト記事]]></title>
+            <description><![CDATA[テストサマリー]]></description>
+            <link>https://example.com</link>
+            <guid isPermaLink="true">https://example.com</guid>
+            <category><![CDATA[テスト]]></category>
+            <pubDate>Tue, 28 Jan 2025 01:00:00 GMT</pubDate>
+            <content:encoded><![CDATA[<div>  <p>テストサマリー</p>    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-radius: 0.5rem;">    <p>📝 テストサマリー1行目</p><p>✨ テストサマリー2行目</p><p>🔍 テストサマリー3行目</p>  </div>    <p>カテゴリ: テスト / 文字数: 100文字</p></div>]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[「小学生のなりたい職業」VTuberが4位に　リアルのYouTuberを上回る]]></title>
+            <description><![CDATA[小学生のなりたい職業1位は「イラストレーター」、中学生は「学校の先生」。VTuberが小学生のなりたい職業で4位にランクインし、YouTuberを上回った。親の職業が子どものなりたい職業に影響を与える傾向が明らかに。]]></description>
+            <link>https://kai-you.net/article/91557</link>
+            <guid isPermaLink="true">https://kai-you.net/article/91557</guid>
+            <category><![CDATA[VTuber動画配信技術]]></category>
+            <pubDate>Tue, 31 Dec 2024 06:42:00 GMT</pubDate>
+            <content:encoded><![CDATA[<div>  <p>小学生のなりたい職業1位は「イラストレーター」、中学生は「学校の先生」。VTuberが小学生のなりたい職業で4位にランクインし、YouTuberを上回った。親の職業が子どものなりたい職業に影響を与える傾向が明らかに。</p>    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-radius: 0.5rem;">    <p>🎨 小学生のなりたい職業1位は「イラストレーター」、中学生は「学校の先生」。</p><p>🎤 VTuberが小学生のなりたい職業で4位にランクイン、YouTuberを上回る。</p><p>📊 親の職業が子どものなりたい職業に影響を与える傾向が明らかに。</p>  </div>    <p>カテゴリ: VTuber動画配信技術 / 文字数: 180文字</p></div>]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[ホロライブ沙花叉クロヱ、34万人に見守られて卒業]]></title>
+            <description><![CDATA[ホロライブのVTuber、沙花叉クロヱさんが卒業ライブを開催し、34万人が視聴。オリジナル曲の作詞作曲も手がけ、音楽活動やメディアミックスプロジェクトにも積極的に参加していた。]]></description>
+            <link>https://kai-you.net/article/91536</link>
+            <guid isPermaLink="true">https://kai-you.net/article/91536</guid>
+            <category><![CDATA[VTuber動画配信技術]]></category>
+            <pubDate>Tue, 31 Dec 2024 04:57:00 GMT</pubDate>
+            <content:encoded><![CDATA[<div>  <p>ホロライブのVTuber、沙花叉クロヱさんが卒業ライブを開催し、34万人が視聴。オリジナル曲の作詞作曲も手がけ、音楽活動やメディアミックスプロジェクトにも積極的に参加していた。</p>    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-radius: 0.5rem;">    <p>🎤 沙花叉クロヱさん、34万人の視聴者と共に卒業ライブを開催。</p><p>🎶 オリジナル曲で作詞作曲も手がけ、音楽活動にも力を入れる。</p><p>🌟 メディアミックスプロジェクト「魔法少女ホロウィッチ！」にも参加。</p>  </div>    <p>カテゴリ: VTuber動画配信技術 / 文字数: 120文字</p></div>]]></content:encoded>
+        </item>
+    </channel>
+</rss>
