@@ -15,6 +15,9 @@ interface TestPageClientProps {
 
 export function TestPageClient({ articles, categories, testDate }: TestPageClientProps) {
   const [currentCategory, setCurrentCategory] = useState<string | undefined>(undefined)
+  const filteredArticles = currentCategory
+    ? articles.filter(article => article.category === currentCategory)
+    : articles;
 
   return (
     <main className="container mx-auto px-4">
@@ -32,8 +35,7 @@ export function TestPageClient({ articles, categories, testDate }: TestPageClien
       <div className="mb-8">
         <h2 className="text-2xl font-bold mb-4">ArticleList テスト</h2>
         <ArticleList
-          articles={articles}
-          category={currentCategory}
+          articles={filteredArticles}
         />
       </div>
 

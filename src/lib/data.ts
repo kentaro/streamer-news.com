@@ -9,6 +9,7 @@ export interface Article {
 	category: string;
 	count: number;
 	thumbnail?: string;
+	summary_lines?: string;
 }
 
 export async function getAllDates(): Promise<string[]> {
