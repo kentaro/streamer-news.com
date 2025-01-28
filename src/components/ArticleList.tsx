@@ -1,3 +1,5 @@
+'use client'
+
 import { ArticleCard } from '@/components/ArticleCard'
 import type { Article } from '@/lib/data'
 

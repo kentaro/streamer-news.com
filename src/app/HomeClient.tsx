@@ -3,8 +3,8 @@
 import { useState } from 'react'
 import { HeroSection } from '@/components/HeroSection'
 import { ArticleList } from '@/components/ArticleList'
-import { DatePagination } from '@/components/DatePagination'
 import { CategoryFilter } from '@/components/CategoryFilter'
+import { DatePagination } from '@/components/DatePagination'
 import type { Article } from '@/lib/data'
 
 interface HomeClientProps {

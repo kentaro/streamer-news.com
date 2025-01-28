@@ -1,5 +1,5 @@
 import { getAllDates, getArticles } from "@/lib/data"
-import { ClientWrapper } from "@/components/ClientWrapper"
+import { HomeClient } from "@/app/HomeClient"
 
 interface DatePageProps {
   params: {
@@ -22,12 +22,14 @@ export default async function DatePage({ params }: DatePageProps) {
   const currentDate = `${year}-${month}-${day}`
   const dates = await getAllDates()
   const articles = await getArticles(currentDate)
+  const categories = [...new Set(articles.map((a) => a.category))]
   const prevDate = dates[dates.indexOf(currentDate) + 1] || null
   const nextDate = dates[dates.indexOf(currentDate) - 1] || null
 
   return (
-    <ClientWrapper
+    <HomeClient
       articles={articles}
+      categories={categories}
       currentDate={currentDate}
       prevDate={prevDate}
       nextDate={nextDate}
