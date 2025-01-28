@@ -1,1 +1,8 @@
-[{"title":"テスト記事","url":"https://example.com","publishedAt":"2025-01-28T10:00:00+09:00","summary":"テストサマリー","category":"テスト","count":100}]
+[{
+  "title": "テスト記事",
+  "link": "https://example.com",
+  "pubdate": "2025-01-28T10:00:00+09:00",
+  "summary": "テストサマリー",
+  "category": "テスト",
+  "count": 100
+}]

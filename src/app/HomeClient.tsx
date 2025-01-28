@@ -7,13 +7,15 @@ import { DatePagination } from '@/components/DatePagination'
 import { CategoryFilter } from '@/components/CategoryFilter'
 import type { Article } from '@/lib/data'
 
-interface TestPageClientProps {
+interface HomeClientProps {
   articles: Article[]
   categories: string[]
-  testDate: string
+  latestDate: string
+  prevDate: string | null
+  nextDate: string | null
 }
 
-export function TestPageClient({ articles, categories, testDate }: TestPageClientProps) {
+export function HomeClient({ articles, categories, latestDate, prevDate, nextDate }: HomeClientProps) {
   const [currentCategory, setCurrentCategory] = useState<string | undefined>(undefined)
 
   return (
@@ -21,7 +23,6 @@ export function TestPageClient({ articles, categories, testDate }: TestPageClien
       <HeroSection />
       
       <div className="mb-8">
-        <h2 className="text-2xl font-bold mb-4">CategoryFilter テスト</h2>
         <CategoryFilter
           categories={categories}
           currentCategory={currentCategory}
@@ -30,21 +31,17 @@ export function TestPageClient({ articles, categories, testDate }: TestPageClien
       </div>
 
       <div className="mb-8">
-        <h2 className="text-2xl font-bold mb-4">ArticleList テスト</h2>
         <ArticleList
           articles={articles}
           category={currentCategory}
         />
       </div>
 
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold mb-4">DatePagination テスト</h2>
-        <DatePagination
-          currentDate={testDate}
-          prevDate="2025-1-27"
-          nextDate={null}
-        />
-      </div>
+      <DatePagination
+        currentDate={latestDate}
+        prevDate={prevDate}
+        nextDate={nextDate}
+      />
     </main>
   )
 } 

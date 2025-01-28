@@ -4,7 +4,7 @@ import path from "node:path";
 export interface Article {
 	title: string;
 	link: string;
-	publishedAt: string;
+	pubdate: string;
 	summary: string;
 	category: string;
 	count: number;
@@ -17,53 +17,37 @@ export async function getArticles(date: string): Promise<Article[]> {
 		process.cwd(),
 		`data/${year}/${month}/${day}.json`,
 	);
-
-	try {
-		const data = await fs.readFile(filePath, "utf-8");
-		return JSON.parse(data);
-	} catch (error) {
-		console.error(`Failed to read file: ${filePath}`, error);
-		return [];
-	}
+	const data = await fs.readFile(filePath, "utf-8");
+	return JSON.parse(data);
 }
 
 export async function getAllDates(): Promise<string[]> {
 	const dates: string[] = [];
 	const dataDir = path.join(process.cwd(), "data");
+	const years = (await fs.readdir(dataDir)).filter((f) => !f.startsWith("."));
 
-	try {
-		const years = (await fs.readdir(dataDir)).filter((f) => !f.startsWith("."));
+	for (const year of years) {
+		const yearDir = path.join(dataDir, year);
+		const months = (await fs.readdir(yearDir)).filter(
+			(f) => !f.startsWith("."),
+		);
 
-		for (const year of years) {
-			const yearPath = path.join(dataDir, year);
-			const stat = await fs.stat(yearPath);
-			if (!stat.isDirectory()) continue;
-
-			const months = (await fs.readdir(yearPath)).filter(
-				(f) => !f.startsWith("."),
+		for (const month of months) {
+			const monthDir = path.join(yearDir, month);
+			const days = (await fs.readdir(monthDir)).filter((f) =>
+				f.endsWith(".json"),
 			);
-			for (const month of months) {
-				const monthPath = path.join(yearPath, month);
-				const days = (await fs.readdir(monthPath)).filter(
-					(f) => !f.startsWith("."),
-				);
 
-				for (const day of days) {
-					if (day.endsWith(".json")) {
-						const dateStr = `${year}-${month}-${day.replace(".json", "")}`;
-						dates.push(dateStr);
-					}
-				}
+			for (const day of days) {
+				dates.push(`${year}-${month}-${day.replace(".json", "")}`);
 			}
 		}
-	} catch (error) {
-		console.error("Failed to get all dates", error);
 	}
 
 	return dates.sort().reverse();
 }
 
-export async function getLatestDate(): Promise<string> {
+export async function getLatestDate(): Promise<string | null> {
 	const dates = await getAllDates();
-	return dates[0] || "";
+	return dates[0] || null;
 }

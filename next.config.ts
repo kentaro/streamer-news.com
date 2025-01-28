@@ -1,10 +1,12 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+const config: NextConfig = {
 	output: "export",
 	trailingSlash: true,
-	images: { unoptimized: true },
+	images: {
+		unoptimized: true,
+	},
 	basePath: process.env.BASE_PATH || "",
 };
 
-export default nextConfig;
+export default config;

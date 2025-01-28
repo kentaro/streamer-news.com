@@ -1,32 +1,39 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { formatDate } from '@/lib/date'
 import { FileText, Link2 } from 'lucide-react'
 import type { Article } from '@/lib/data'
-import { formatDate } from '@/lib/date'
 
-interface ArticleCardProps {
-  article: Article
+interface DomainInfoProps {
+  url: string
 }
 
-function getDomain(url: string): string {
-  try {
-    const domain = new URL(url).hostname.replace(/^www\./, '')
-    return domain
-  } catch (error) {
-    console.error('Invalid URL:', url)
-    return new URL('https://example.com').hostname
-  }
-}
-
-export function ArticleCard({ article }: ArticleCardProps) {
-  const domain = getDomain(article.link)
+function DomainInfo({ url }: DomainInfoProps) {
+  const domain = new URL(url).hostname.replace(/^www\./, '')
+  const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}`
 
   return (
-    <div className="overflow-hidden bg-card rounded-lg border shadow-sm hover:shadow-lg transition-shadow">
+    <div className="flex items-center gap-2">
+      <Image
+        src={faviconUrl}
+        alt={domain}
+        width={16}
+        height={16}
+        className="rounded-sm"
+      />
+      <span className="text-sm text-muted-foreground">{domain}</span>
+    </div>
+  )
+}
+
+export function ArticleCard({ article }: { article: Article }) {
+  return (
+    <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-200">
       {article.thumbnail && (
-        <div className="relative w-full h-48">
+        <div className="relative h-48">
           <Image
             src={article.thumbnail}
             alt={article.title}
@@ -35,34 +42,36 @@ export function ArticleCard({ article }: ArticleCardProps) {
           />
         </div>
       )}
-      <div className="p-6">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary text-secondary-foreground">
-            {article.category}
-          </span>
-          <span className="text-sm text-muted-foreground">
-            {formatDate(article.publishedAt)}
-          </span>
+
+      <CardHeader className="space-y-2">
+        <Badge className="w-fit">{article.category}</Badge>
+        <a
+          href={article.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xl font-bold hover:underline"
+        >
+          {article.title}
+        </a>
+        <p className="text-muted-foreground line-clamp-3">{article.summary}</p>
+      </CardHeader>
+
+      <CardContent>
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <FileText size={16} />
+          <span>{article.count.toLocaleString()}文字</span>
         </div>
-        <h3 className="text-lg font-semibold leading-tight mb-2 line-clamp-2">
-          <Link href={article.link} target="_blank" rel="noopener noreferrer" className="hover:underline">
-            {article.title}
-          </Link>
-        </h3>
-        <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
-          {article.summary}
-        </p>
-        <div className="flex justify-between text-sm text-muted-foreground">
-          <div className="flex items-center gap-1">
-            <FileText className="w-4 h-4" />
-            <span>{article.count}文字</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <Link2 className="w-4 h-4" />
-            <span>{domain}</span>
-          </div>
+      </CardContent>
+
+      <CardFooter className="flex justify-between">
+        <DomainInfo url={article.link} />
+        <div className="flex items-center gap-2">
+          <Link2 size={16} className="text-muted-foreground" />
+          <time className="text-sm text-muted-foreground">
+            {formatDate(article.pubdate)}
+          </time>
         </div>
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   )
 } 

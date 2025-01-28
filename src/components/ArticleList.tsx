@@ -21,9 +21,9 @@ export function ArticleList({ articles, category }: ArticleListProps) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {filteredArticles.map(article => (
+      {filteredArticles.map((article, index) => (
         <ArticleCard
-          key={article.link}
+          key={`${article.link}-${index}`}
           article={article}
         />
       ))}

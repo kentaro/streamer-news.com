@@ -1,7 +1,3 @@
-import { HeroSection } from '@/components/HeroSection'
-import { ArticleList } from '@/components/ArticleList'
-import { DatePagination } from '@/components/DatePagination'
-import { CategoryFilter } from '@/components/CategoryFilter'
 import { getArticles } from '@/lib/data'
 import { TestPageClient } from './TestPageClient'
 

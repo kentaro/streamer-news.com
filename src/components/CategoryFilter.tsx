@@ -1,71 +1,49 @@
 'use client'
 
-import { useState } from 'react'
+import { Button } from '@/components/ui/button'
 import { Check, ChevronDown } from 'lucide-react'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
 interface CategoryFilterProps {
   categories: string[]
-  currentCategory?: string
+  currentCategory: string | undefined
   onCategoryChange: (category: string | undefined) => void
 }
 
 export function CategoryFilter({ categories, currentCategory, onCategoryChange }: CategoryFilterProps) {
-  const handleSelect = (category: string | null) => {
-    onCategoryChange(category || undefined)
-    const menu = document.getElementById('category-menu')
-    if (menu) {
-      menu.classList.add('hidden')
-    }
+  const handleSelect = (category: string | undefined) => {
+    onCategoryChange(category)
   }
 
   return (
-    <div className="flex justify-end mb-6">
-      <div className="relative">
-        <button
-          type="button"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-md border hover:bg-muted"
-          onClick={() => {
-            const menu = document.getElementById('category-menu')
-            if (menu) {
-              menu.classList.toggle('hidden')
-            }
-          }}
-        >
-          {currentCategory || 'すべてのカテゴリ'}
-          <ChevronDown className="w-4 h-4" />
-        </button>
-
-        <div
-          id="category-menu"
-          className="hidden absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-popover border"
-        >
-          <div className="py-1" role="menu">
-            <button
-              type="button"
-              className="w-full text-left px-4 py-2 text-sm hover:bg-muted flex items-center gap-2"
-              onClick={() => handleSelect(null)}
-            >
-              {!currentCategory && <Check className="w-4 h-4" />}
-              <span className={!currentCategory ? 'font-medium' : ''}>
-                すべてのカテゴリ
-              </span>
-            </button>
-            {categories.map((category) => (
-              <button
-                key={category}
-                type="button"
-                className="w-full text-left px-4 py-2 text-sm hover:bg-muted flex items-center gap-2"
-                onClick={() => handleSelect(category)}
-              >
-                {currentCategory === category && <Check className="w-4 h-4" />}
-                <span className={currentCategory === category ? 'font-medium' : ''}>
-                  {category}
-                </span>
-              </button>
-            ))}
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" className="w-[200px] justify-between">
+          {currentCategory || 'カテゴリー選択'}
+          <ChevronDown className="ml-2 h-4 w-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-[200px]">
+        <DropdownMenuItem onClick={() => handleSelect(undefined)}>
+          <div className="flex items-center justify-between w-full">
+            すべて
+            {currentCategory === undefined && <Check className="ml-2 h-4 w-4" />}
           </div>
-        </div>
-      </div>
-    </div>
+        </DropdownMenuItem>
+        {categories.map((category) => (
+          <DropdownMenuItem key={category} onClick={() => handleSelect(category)}>
+            <div className="flex items-center justify-between w-full">
+              {category}
+              {currentCategory === category && <Check className="ml-2 h-4 w-4" />}
+            </div>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 } 

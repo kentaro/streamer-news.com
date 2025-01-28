@@ -8,25 +8,29 @@ dayjs.extend(timezone);
 dayjs.locale("ja");
 dayjs.tz.setDefault("Asia/Tokyo");
 
-export const formatDate = (iso: string) => {
+export function formatDate(iso: string): string {
 	return dayjs(iso).tz().format("YYYY年M月D日H時mm分");
-};
+}
 
-export const formatDatePath = (date: string) => {
+export function formatDatePath(date: string): string {
 	const [year, month, day] = date.split("-");
 	return `${year}/${month}/${day}`;
-};
+}
 
-export const parseDatePath = (year: string, month: string, day: string) => {
+export function parseDatePath(
+	year: string,
+	month: string,
+	day: string,
+): string {
 	return `${year}-${month}-${day}`;
-};
+}
 
-export const getNextDate = (date: string, dates: string[]) => {
+export function getNextDate(date: string, dates: string[]): string | null {
 	const index = dates.indexOf(date);
 	return index > 0 ? dates[index - 1] : null;
-};
+}
 
-export const getPrevDate = (date: string, dates: string[]) => {
+export function getPrevDate(date: string, dates: string[]): string | null {
 	const index = dates.indexOf(date);
 	return index < dates.length - 1 ? dates[index + 1] : null;
-};
+}
