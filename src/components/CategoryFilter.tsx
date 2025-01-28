@@ -15,11 +15,11 @@ interface CategoryFilterProps {
   onCategoryChange: (category: string | undefined) => void
 }
 
-export function CategoryFilter({ categories, currentCategory, onCategoryChange }: CategoryFilterProps) {
-  const handleSelect = (category: string | undefined) => {
-    onCategoryChange(category)
-  }
-
+export function CategoryFilter({
+  categories,
+  currentCategory,
+  onCategoryChange,
+}: CategoryFilterProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -29,14 +29,14 @@ export function CategoryFilter({ categories, currentCategory, onCategoryChange }
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[200px]">
-        <DropdownMenuItem onClick={() => handleSelect(undefined)}>
+        <DropdownMenuItem onClick={() => onCategoryChange(undefined)}>
           <div className="flex items-center justify-between w-full">
             すべて
             {currentCategory === undefined && <Check className="ml-2 h-4 w-4" />}
           </div>
         </DropdownMenuItem>
         {categories.map((category) => (
-          <DropdownMenuItem key={category} onClick={() => handleSelect(category)}>
+          <DropdownMenuItem key={category} onClick={() => onCategoryChange(category)}>
             <div className="flex items-center justify-between w-full">
               {category}
               {currentCategory === category && <Check className="ml-2 h-4 w-4" />}

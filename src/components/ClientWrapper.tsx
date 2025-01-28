@@ -3,26 +3,25 @@
 import { useState } from 'react'
 import { HeroSection } from '@/components/HeroSection'
 import { ArticleList } from '@/components/ArticleList'
-import { DatePagination } from '@/components/DatePagination'
 import { CategoryFilter } from '@/components/CategoryFilter'
+import { DatePagination } from '@/components/DatePagination'
 import type { Article } from '@/lib/data'
 
-interface HomeClientProps {
+interface ClientWrapperProps {
   articles: Article[]
-  categories: string[]
   currentDate: string
   prevDate: string | null
   nextDate: string | null
 }
 
-export function HomeClient({
+export function ClientWrapper({
   articles,
-  categories,
   currentDate,
   prevDate,
   nextDate,
-}: HomeClientProps) {
+}: ClientWrapperProps) {
   const [currentCategory, setCurrentCategory] = useState<string | undefined>(undefined)
+  const categories = [...new Set(articles.map((a) => a.category))]
   const filteredArticles = currentCategory
     ? articles.filter((article) => article.category === currentCategory)
     : articles

@@ -1,38 +1,34 @@
-import { getArticles, getAllDates } from '@/lib/data'
-import { HomeClient } from '@/app/HomeClient'
-import { parseDatePath, getNextDate, getPrevDate } from '@/lib/date'
+import { getAllDates, getArticles } from "@/lib/data"
+import { ClientWrapper } from "@/components/ClientWrapper"
 
 interface DatePageProps {
-  params: Promise<{
+  params: {
     year: string
     month: string
     day: string
-  }>
+  }
 }
 
 export async function generateStaticParams() {
   const dates = await getAllDates()
-  return dates.map(date => {
-    const [year, month, day] = date.split('-')
+  return dates.map((date) => {
+    const [year, month, day] = date.split("-")
     return { year, month, day }
   })
 }
 
 export default async function DatePage({ params }: DatePageProps) {
-  const { year, month, day } = await params
-  const currentDate = parseDatePath(year, month, day)
-  const articles = await getArticles(currentDate)
-  const categories = [...new Set(articles.map(article => article.category))]
-  
+  const { year, month, day } = params
+  const currentDate = `${year}-${month}-${day}`
   const dates = await getAllDates()
-  const prevDate = getPrevDate(currentDate, dates)
-  const nextDate = getNextDate(currentDate, dates)
+  const articles = await getArticles(currentDate)
+  const prevDate = dates[dates.indexOf(currentDate) + 1] || null
+  const nextDate = dates[dates.indexOf(currentDate) - 1] || null
 
   return (
-    <HomeClient
+    <ClientWrapper
       articles={articles}
-      categories={categories}
-      latestDate={currentDate}
+      currentDate={currentDate}
       prevDate={prevDate}
       nextDate={nextDate}
     />
